@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# Qiskit
-# Example of Bell, or entangled, states
+# Using SenseHat 8x8 UI to display Qiskit results dictionaries
+
 from sense_hat import SenseHat
 hat = SenseHat()
 
@@ -42,12 +42,8 @@ def SenseDisplay(InputDict,Qbits):
     red = (255, 0, 0)
     green = (0, 255, 0)
     blue = (0, 0, 255)
-    # examples using (x, y, pixel)
+    # Clear SenseHat 
     hat.clear()
-    #hat.set_pixel(0, 0, red)
-    #hat.set_pixel(0, 0, green)
-    #hat.set_pixel(0, 0, blue)
-    set_display()
     for key in Qdict:
         y=7-int(key,2)
         for x in range (0,8):
