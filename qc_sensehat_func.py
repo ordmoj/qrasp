@@ -6,6 +6,27 @@ hat = SenseHat()
 
 # Create SenseHat Display function
 
+def set_display():
+        acceleration = hat.get_accelerometer_raw()
+        x = acceleration['x']
+        y = acceleration['y']
+        z = acceleration['z']
+        x=round(x,0)
+        y=round(y,0)
+        z=round(z,0)
+        print("x={0}, y={1}, z={2}".format(x,y,z))
+        if x == 1:
+            hat.set_rotation(180)
+        else:
+            if x == -1:
+                hat.set_rotation(0)
+            else:
+                if y == 1:
+                    hat.set_rotation(270)
+                else:
+                    hat.set_rotation(90)
+
+
 def SenseDisplay(InputDict,Qbits):
     #Create a default dictionary with all values 0
     global lst
@@ -26,6 +47,7 @@ def SenseDisplay(InputDict,Qbits):
     #hat.set_pixel(0, 0, red)
     #hat.set_pixel(0, 0, green)
     #hat.set_pixel(0, 0, blue)
+    set_display()
     for key in Qdict:
         y=7-int(key,2)
         for x in range (0,8):
