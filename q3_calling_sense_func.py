@@ -9,8 +9,7 @@ def execute():
     from qiskit import execute
     import numpy as np
     #Set number of bits and number of shots
-    n = 2
-    print(n)
+    n = 3
     sh = 1024
     # Create a Quantum Register with n qubits
     qr = QuantumRegister(n)
@@ -20,10 +19,16 @@ def execute():
     circuit = QuantumCircuit(qr, cr)
     # Add gates to the circuit
     circuit.h(qr[0])
+    circuit.h(qr[1])
+    circuit.h(qr[2])
+    #circuit.cx(qr[1], qr[2])
+    #circuit.cx(qr[0], qr[2])
+    #circuit.h(qr[0])
     #circuit.h(qr[1])
-    circuit.cx(qr[0], qr[1])
+    #circuit.h(qr[2])
     circuit.measure(qr[0], cr[0])
     circuit.measure(qr[1], cr[1])
+    circuit.measure(qr[2], cr[2])
     # Set the backend to execute on
     from qiskit import Aer
     backend = Aer.get_backend('qasm_simulator')

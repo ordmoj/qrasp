@@ -42,10 +42,15 @@ def SenseDisplay(InputDict,Qbits):
     red = (255, 0, 0)
     green = (0, 255, 0)
     blue = (0, 0, 255)
-    # Clear SenseHat
-    set_display()
+    # Clear SenseHat 
     hat.clear()
-    for key in Qdict:
+<<<<<<< HEAD
+    #hat.set_pixel(0, 0, red)
+    #hat.set_pixel(0, 0, green)
+    #hat.set_pixel(0, 0, blue)
+    set_display()
+=======
+>>>>>>> 091224e28699dd05d6a6da45cd5a9f2b2e6f97f0    for key in Qdict:
         y=7-int(key,2)
         for x in range (0,8):
                 if (x*128)-Qdict[key]<0:
