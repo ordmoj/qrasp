@@ -1,6 +1,8 @@
 # Qrasp - Two and three qubit Qiskit user interface on Raspberry PI SenseHat
 A set of Python scripts that uses Qiskit to run two or three qubit quantum circuits and display the results as bar graphs on a Raspberry PI SenseHat 8x8 LED display.
 
+![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
+
 ## Contents
 Qrasp consists of the following scripts:
 1. main_controller.py  
