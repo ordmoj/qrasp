@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# Using SenseHat 8x8 UI to display Qiskit results dictionaries
+# Using SenseHat 8x8 display to show bar graph of 2 or 3 qubit Qiskit results dictionaries
 
+# Start by importing and simplifying required modules. 
 from sense_hat import SenseHat
 hat = SenseHat()
 
-# Create SenseHat Display function
-
+# Understand which direction is down, and rotate the SenseHat display accordingly.
 def set_display():
         acceleration = hat.get_accelerometer_raw()
         x = acceleration['x']
@@ -14,7 +14,6 @@ def set_display():
         x=round(x,0)
         y=round(y,0)
         z=round(z,0)
-        print("x={0}, y={1}, z={2}".format(x,y,z))
         if x == 1:
             hat.set_rotation(180)
         else:
@@ -26,32 +25,37 @@ def set_display():
                 else:
                     hat.set_rotation(90)
 
-
+# Defining the SenseDisplay function.
 def SenseDisplay(InputDict,Qbits):
-    #Create a default dictionary with all values 0
+    # Create a default Qdict dictionary with all values 0
     global lst
     lst = [bin(x)[2:].rjust(Qbits, '0') for x in range(2**Qbits)]
     values = [0]*pow(2,Qbits)
-    #print(values)
-    #print(lst)
     Qdict = dict(zip(lst,values))
-    # Update the dictionary with the actual values
+    # Update the dictionary with the actual dictionary values sent to the function.
     Qdict.update(InputDict)
-    #Scale by dividing by 1024 (shots)
-    #Qdict.update({m: (1/sh) * Qdict[m] for m in Qdict.keys()})
+    # Scale by dividing by 1024 (shots) - For now assuming 1024, which is set by the sh parameter.
+    # Qdict.update({m: (1/sh) * Qdict[m] for m in Qdict.keys()})
+
+    # Defining the display colors.
     red = (255, 0, 0)
     green = (0, 255, 0)
     blue = (0, 0, 255)
-    # Clear SenseHat
+    
+    # Clear SenseHat display 
     set_display()
     hat.clear()
+    
+    # Writing to the SenseHat display pixels.
     for key in Qdict:
         y=7-int(key,2)
         for x in range (0,8):
                 if (x*128)-Qdict[key]<0:
-                        hat.set_pixel(x, y, red)
+                        #Set bar color.
+                        hat.set_pixel(x, y, red) 
                 else:
-                        hat.set_pixel(x, y, blue)
+                        #Set background color
+                        hat.set_pixel(x, y, blue) 
        # print (Qdict[key])
        # print (int(key,2))
 
