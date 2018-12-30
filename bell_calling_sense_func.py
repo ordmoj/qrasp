@@ -22,7 +22,6 @@ def execute():
     circuit = QuantumCircuit(qr, cr)
     # Add gates to the circuit
     circuit.h(qr[0])
-    #circuit.h(qr[1])
     circuit.cx(qr[0], qr[1])
     circuit.measure(qr[0], cr[0])
     circuit.measure(qr[1], cr[1])
