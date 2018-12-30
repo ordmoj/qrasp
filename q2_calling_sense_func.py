@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Python function that creates a simple, two qubit quantum cirquit and sets up and measures each qubit in a superposition state.
+
 # Start by importing and simplifying required modules. 
 
 from sense_hat import SenseHat
