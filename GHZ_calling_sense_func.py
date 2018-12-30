@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-# Qiskit
-# Example of Bell, or entangled, states
+# Python function that creates a simple, three qubit quantum cirquit and sets up and measures an entangled GHZ state.
+
+# Start by importing and simplifying required modules. 
 from sense_hat import SenseHat
 hat = SenseHat()
 
+# Define the execute function that is called by the main controller.
 def execute():
     from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
     from qiskit import execute
@@ -36,10 +38,13 @@ def execute():
     job = execute(circuit, backend, shots=sh)
     # Get the result of the execution
     result = job.result()
-    # Privode the results
+    # Provide the results
     print ("Results:")
     #print (result)
     Qdictres = result.get_counts(circuit)
     print(Qdictres)
+    
+    # Import the Raspberry PI SenseHat display function.
     from qc_sensehat_func import SenseDisplay
+    # Display the quantum dictionary as a bar graph on the SenseHat 8x8 pixel display by calling the SenseDisplay function.
     SenseDisplay(Qdictres,n)
