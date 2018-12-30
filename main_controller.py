@@ -17,7 +17,6 @@ def set_display():
         x=round(x,0)
         y=round(y,0)
         z=round(z,0)
-        #print("x={0}, y={1}, z={2}".format(x,y,z))
         if x == 1:
             hat.set_rotation(270)
         else:
