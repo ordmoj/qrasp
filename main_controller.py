@@ -1,10 +1,14 @@
+# Main controller for Qiskit on Raspberry PI SenseHat.
+
+# Start by importing and simplifying required modules. 
 from sense_hat import SenseHat
- 
 hat = SenseHat()
 
+# Set default SenseHat configuration.
 hat.clear()
 hat.low_light = True
 
+# Understand which direction is down, and rotate the SenseHat display accordingly.
 def set_display():
         acceleration = hat.get_accelerometer_raw()
         x = acceleration['x']
@@ -27,21 +31,22 @@ def set_display():
 
 set_display()                
 
+# Load the Qiskit function files. Showing messages when starting and when done.
 hat.show_message("Load")
 
-import bell_calling_sense_func
 import q2_calling_sense_func
 import q3_calling_sense_func
+import bell_calling_sense_func
 import GHZ_calling_sense_func
 
 hat.show_message("OK")
 
+# The main loop.
+# Use the joystick to select and execute one of the Qiskit function files.
 
 while True:
     joy_event = hat.stick.get_events()
     if len(joy_event) > 0 and joy_event[0][2]=="pressed":
-        # print (joy_event[0][1])
-        # hat.show_message(joy_event[0][1])
         set_display()
         if joy_event[0][1]=="up":
             hat.show_message("Bell")
@@ -58,6 +63,3 @@ while True:
                     if joy_event[0][1]=="right":
                         hat.show_message("3Q")
                         q3_calling_sense_func.execute()
-
-
-# Works one time. Need to figure out how to restart.
