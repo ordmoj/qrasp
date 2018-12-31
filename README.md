@@ -21,6 +21,24 @@ Python function that creates a simple, three qubit quantum cirquit and sets up a
 3. qc_sensehat_func.py  
 Using SenseHat 8x8 display to show bar graph of 2 or 3 qubit Qiskit results dictionaries.
 
+### What you can do with this version...
+This version lets you run four different quantum scripts that demo superposition and entanglement with two and three qubits.
+
+You use the joystick to select the script to run: 
+- Right: Two qubit Bell state (entanglement)
+- Left: Two qubit superposition
+- Down: Three qubit superposition
+- Up: Three qubit GHZ state (entanglement)
+
+The quantum circuits currently run on the 'qasm_simulator' backend. 
+
+### Planned for the future
+- Use of the joystick 'button' to switch between simulator and hardware backend.
+- Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
+- Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 or the bar.
+- More...
+
+
 ## Requirements  
 
 These scripts were developed and tested with the following hard- and software:
@@ -29,5 +47,5 @@ These scripts were developed and tested with the following hard- and software:
    - Raspberry Pi Sense HAT (v1.0)
 - Software
   - Raspbian GNU/Linux 9 (stretch)
-  - qiskit 0.6.1
+  - qiskit 0.6.1 (not yet tested on 0.7)
   - sense-hat 2.2.0
