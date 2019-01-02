@@ -25,10 +25,10 @@ Using SenseHat 8x8 display to show bar graph of 2 or 3 qubit Qiskit results dict
 This version lets you run four different quantum scripts that demo superposition and entanglement with two and three qubits.
 
 You use the joystick to select the script to run: 
-- Right: Two qubit Bell state (entanglement)
+- Up: Two qubit Bell state (entanglement)
+- Down: Three qubit GHZ state (entanglement)
+- Right: Three qubit superposition
 - Left: Two qubit superposition
-- Down: Three qubit superposition
-- Up: Three qubit GHZ state (entanglement)
 
 The quantum circuits currently run on the 'qasm_simulator' backend. 
 
