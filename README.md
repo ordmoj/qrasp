@@ -47,5 +47,5 @@ These scripts were developed and tested with the following hard- and software:
    - Raspberry Pi Sense HAT (v1.0)
 - Software
   - Raspbian GNU/Linux 9 (stretch)
-  - qiskit 0.6.1 (not yet tested on 0.7)
+  - qiskit 0.6.1 (seems to run fine on 0.7)
   - sense-hat 2.2.0
