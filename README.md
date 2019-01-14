@@ -3,6 +3,18 @@ A set of Python scripts that uses Qiskit to run two or three qubit quantum circu
 
 ![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
 
+## Requirements  
+
+These scripts were developed and tested with the following hard- and software:
+- Hardware
+   - Raspberry PI 2B (a21041)
+   - Raspberry Pi Sense HAT (v1.0)
+- Software
+  - Raspbian GNU/Linux 9 (stretch)
+  - [qiskit](https://qiskit.org/) 0.6.1 (seems to run fine on 0.7)
+  - sense-hat 2.2.0
+
+
 ## Contents
 Qrasp consists of the following scripts:
 1. main_controller.py  
@@ -39,13 +51,3 @@ The quantum circuits currently run on the 'qasm_simulator' backend.
 - More...
 
 
-## Requirements  
-
-These scripts were developed and tested with the following hard- and software:
-- Hardware
-   - Raspberry PI 2B (a21041)
-   - Raspberry Pi Sense HAT (v1.0)
-- Software
-  - Raspbian GNU/Linux 9 (stretch)
-  - [qiskit](https://qiskit.org/) 0.6.1 (seems to run fine on 0.7)
-  - sense-hat 2.2.0
