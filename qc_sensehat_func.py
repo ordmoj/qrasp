@@ -26,16 +26,30 @@ def set_display():
                     hat.set_rotation(90)
 
 # Defining the SenseDisplay function.
-def SenseDisplay(InputDict,Qbits):
+def SenseDisplay(InputDict,Qbits,back):
     # Create a default Qdict dictionary with all values 0
     global lst
     lst = [bin(x)[2:].rjust(Qbits, '0') for x in range(2**Qbits)]
     values = [0]*pow(2,Qbits)
     Qdict = dict(zip(lst,values))
     # Update the dictionary with the actual dictionary values sent to the function.
-    Qdict.update(InputDict)
+    # If we are running on IBMQ (or if qiskit version is > 0.6, later)
+    print(InputDict)
+    if back =='ibmq':
+        k = len(InputDict)
+        #print(k)
+        InputDictList=list(InputDict.keys())
+        InputDictVal=list(InputDict.values())
+        for i in range (0,k):
+            #print(bin(int(InputDictList[i],16))[2:].zfill(2))
+            #print(Qdict[bin(int(InputDictList[i],16))[2:].zfill(2)])
+            Qdict[bin(int(InputDictList[i],16))[2:].zfill(2)]=InputDictVal[i]
+            #print(Qdict[bin(int(InputDictList[i],16))[2:].zfill(2)])
+    else:
+        Qdict.update(InputDict)
     # Scale by dividing by 1024 (shots) - For now assuming 1024, which is set by the sh parameter.
-    # Qdict.update({m: (1/sh) * Qdict[m] for m in Qdict.keys()})
+
+# Qdict.update({m: (1/sh) * Qdict[m] for m in Qdict.keys()})
 
     # Defining the display colors.
     red = (255, 0, 0)
