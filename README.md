@@ -89,11 +89,10 @@ You use the joystick to select the script to run:
 - Down: Three qubit GHZ state (entanglement)
 - Right: Three qubit superposition
 - Left: Two qubit superposition
-
-The quantum circuits currently run on the 'qasm_simulator' backend.
+- Push: Set the backend (AER 'qasm_simulator' or IBMQ best available)
 
 ### Planned for the future
-- Use of the joystick 'button' to switch between simulator and hardware backend.
 - Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
+- Use built-in SenseHat emulator instead of hardware SenseHat.
 - Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 or the bar.
 - More...
