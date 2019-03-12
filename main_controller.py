@@ -35,6 +35,18 @@ O, O, Y, O, X, Y, O, O,
 O, O, O, X, X, X, O, O
 ]
 
+IBMQ_super_position = [
+O, O, O, Y, B, O, O, O,
+O, O, Y, B, B, Y, O, O,
+O, Y, O, O, B, O, Y, O,
+O, Y, O, O, B, O, Y, O,
+O, Y, O, O, B, O, Y, O,
+O, Y, O, O, B, O, Y, O,
+O, O, Y, O, B, Y, O, O,
+O, O, O, B, B, B, O, O
+]
+
+
 IBM_Q = [
 B, B, B, W, W, B, B, B,
 B, B, W, B, B, W, B, B,
@@ -58,9 +70,6 @@ O, W, O, O, O, O, W, O,
 O, O, W, W, W, W, O, O
 ]
 
-hat.set_pixels(super_position)
-
-
 # Understand which direction is down, and rotate the SenseHat display accordingly.
 def set_display():
         acceleration = hat.get_accelerometer_raw()
@@ -83,19 +92,15 @@ def set_display():
 
 set_display()                
 
-# Set simulator/IBM Q default Aer
-back = "unset"
-# Set the backend
+# Function to set the backend
 def set_backend(back):
     global backend
     if back == "ibmq":
-        backend = IBMQ.get_backend('ibmqx2')
+        backend = IBMQ.get_backend('ibmqx4')
     else:
         backend = Aer.get_backend('qasm_simulator')    
     print(backend.name)
     
-#backend = Aer.get_backend('qasm_simulator')
-
 # Load the Qiskit function files. Showing messages when starting and when done.
 hat.show_message("Qiskit")
 
@@ -105,10 +110,11 @@ import bell_calling_sense_func
 import GHZ_calling_sense_func
 #import set_backend
 
-hat.set_pixels(super_position)
-
+# Initialize the backend to AER
+back = "aer" 
 set_backend(back)
-#hat.show_message(backend.name())
+hat.show_message(backend.name())
+hat.set_pixels(IBM_AER)
 
 # The main loop.
 # Use the joystick to select and execute one of the Qiskit function files.
@@ -120,37 +126,51 @@ while True:
         if joy_event[0][1]=="up":
             hat.show_message("Bell")
             #hat.show_message(backend.name())
-            hat.set_pixels(super_position)
+            if back == "ibmq":
+                hat.set_pixels(IBMQ_super_position)
+            else:
+                hat.set_pixels(super_position)
             bell_calling_sense_func.execute(backend,back)
         else:
             if joy_event[0][1]=="down":
                 hat.show_message("GHZ")
                 #hat.show_message(backend.name())
-                hat.set_pixels(super_position)
+                if back == "ibmq":
+                    hat.set_pixels(IBMQ_super_position)
+                else:
+                    hat.set_pixels(super_position)
                 GHZ_calling_sense_func.execute(backend,back)
             else:
                 if joy_event[0][1]=="left":
                     hat.show_message("2Q")
                     #hat.show_message(backend.name())
-                    hat.set_pixels(super_position)
+                    if back == "ibmq":
+                        hat.set_pixels(IBMQ_super_position)
+                    else:
+                        hat.set_pixels(super_position)
                     q2_calling_sense_func.execute(backend,back)
                 else:
                     if joy_event[0][1]=="right":
                         hat.show_message("3Q")
                         #hat.show_message(backend.name())
-                        hat.set_pixels(super_position)
+                        if back == "ibmq":
+                            hat.set_pixels(IBMQ_super_position)
+                        else:
+                            hat.set_pixels(super_position)
                         q3_calling_sense_func.execute(backend,back)
                     else:
                         if joy_event[0][1]=="middle":
                             if back == "aer":
                                 back = "ibmq"
-                                hat.show_message("IBMQ")
-                                hat.set_pixels(IBM_Q)
+                                #hat.show_message("IBMQ")
                                 set_backend(back)
+                                hat.show_message(backend.name())
+                                hat.set_pixels(IBM_Q)
                             else:
-                                if back == "ibmq" or back == "unset":
-                                    back = "aer"
-                                    hat.show_message("AER")
-                                    hat.set_pixels(IBM_AER)
-                                    set_backend(back)
+                                back = "aer"
+                                #hat.show_message("AER")
+                                set_backend(back)
+                                hat.show_message(backend.name())
+                                hat.set_pixels(IBM_AER)
+                                    
 
