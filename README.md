@@ -4,8 +4,8 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
 ![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
 
 ## Updates
-March 2019 - 
-January 2019 - Initial version 0.1
+- March 2019 - V0.2 with updates to run Qrasp against actual IBM Q hardware.  
+- January 2019 - Initial version 0.1  
 
 ## Requirements  
 
