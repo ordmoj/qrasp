@@ -31,7 +31,8 @@ You use the joystick to select the script to run:
 
 ### Planned for the future
 - Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
-- Queue indicator for running against IBM Q hardware.
+- Status and queue indicator for running against IBM Q hardware.
+- Auto selector for best IBM Q hardware.
 - Use built-in SenseHat emulator instead of hardware SenseHat.
 - Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 or the bar.
 - More...
