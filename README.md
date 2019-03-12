@@ -3,6 +3,10 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
 
 ![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
 
+## Updates
+March 2019 - 
+January 2019 - Initial version 0.1
+
 ## Requirements  
 
 These scripts were developed and tested with the following hard- and software:
@@ -11,9 +15,26 @@ These scripts were developed and tested with the following hard- and software:
    - Raspberry Pi Sense HAT (v1.0)
 - Software
   - Raspbian GNU/Linux 9 (stretch)
-  - [qiskit](https://qiskit.org/) 0.6.1 (seems to run fine on 0.7)
   - sense-hat 2.2.0
+  - [qiskit](https://qiskit.org/) 0.6.1 (seems to run fine on 0.7) 
+**Note:** This software was developed on qiskit v0.6.1. The qiskit-returned results dictionary differs between v0.6 and v0.7. If you are running Qrasp on qiskit v0.7 or higher you must uncomment a line in *qc_sensehat_func.py* to override the v0.6 processing. See the comment in that file. 
 
+### What you can do with this version...
+This version lets you run four different quantum scripts that demo superposition and entanglement with two and three qubits.
+
+You use the joystick to select the script to run:
+- Up: Two qubit Bell state (entanglement)
+- Down: Three qubit GHZ state (entanglement)
+- Right: Three qubit superposition
+- Left: Two qubit superposition
+- Push: Set the backend (AER 'qasm_simulator' or IBMQ 'ibmqx2' configurable in main_controller.py)
+
+### Planned for the future
+- Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
+- Queue indicator for running against IBM Q hardware.
+- Use built-in SenseHat emulator instead of hardware SenseHat.
+- Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 or the bar.
+- More...
 
 ## Contents
 Qrasp consists of the following scripts:
@@ -81,18 +102,4 @@ Python function that creates a simple, three qubit quantum cirquit and sets up a
 3. qc_sensehat_func.py  
 Using SenseHat 8x8 display to show bar graph of 2 or 3 qubit Qiskit results dictionaries.
 
-### What you can do with this version...
-This version lets you run four different quantum scripts that demo superposition and entanglement with two and three qubits.
 
-You use the joystick to select the script to run:
-- Up: Two qubit Bell state (entanglement)
-- Down: Three qubit GHZ state (entanglement)
-- Right: Three qubit superposition
-- Left: Two qubit superposition
-- Push: Set the backend (AER 'qasm_simulator' or IBMQ best available)
-
-### Planned for the future
-- Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
-- Use built-in SenseHat emulator instead of hardware SenseHat.
-- Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 or the bar.
-- More...
