@@ -89,7 +89,7 @@ back = "unset"
 def set_backend(back):
     global backend
     if back == "ibmq":
-        backend = IBMQ.get_backend('ibmqx4')
+        backend = IBMQ.get_backend('ibmqx2')
     else:
         backend = Aer.get_backend('qasm_simulator')    
     print(backend.name)

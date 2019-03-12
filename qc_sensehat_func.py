@@ -5,7 +5,6 @@
 from sense_hat import SenseHat
 hat = SenseHat()
 
-print(qiskit_ver)
 # Understand which direction is down, and rotate the SenseHat display accordingly.
 def set_display():
         acceleration = hat.get_accelerometer_raw()
@@ -33,10 +32,15 @@ def SenseDisplay(InputDict,Qbits,back):
     lst = [bin(x)[2:].rjust(Qbits, '0') for x in range(2**Qbits)]
     values = [0]*pow(2,Qbits)
     Qdict = dict(zip(lst,values))
-    # Update the dictionary with the actual dictionary values sent to the function.
-    # If we are running on IBMQ (or if qiskit version is > 0.6, later)
-    print(InputDict)
     
+    # Uncomment the 'back' parameter line below if you are running qiskit v0.7 or higher.
+    # The local dictionary returned by Aer differs between v0.6 and v0.7+
+    # The 'else' process below is made for qiskit v0.6 on the Raspberry PI,
+    # with the 'if' process a workaround for v0.7 and IBM Q hardware (back = 'ibmq').
+    
+    # back = 'ibmq'
+    
+    # Update the dictionary with the actual dictionary values sent to the function.        
     if back =='ibmq': 
         k = len(InputDict)
         print(k)
@@ -47,11 +51,12 @@ def SenseDisplay(InputDict,Qbits,back):
             # print(Qdict[bin(int(InputDictList[i],16))[2:].zfill(Qbits)])
     else:
         Qdict.update(InputDict)
-    # Scale by dividing by 1024 (shots) - For now assuming 1024, which is set by the sh parameter.
-    
-    # print(Qdict)
 
+    # Scale by dividing by 1024 (shots) - For now assuming 1024, which is set by the sh parameter.
     # Qdict.update({m: (1/sh) * Qdict[m] for m in Qdict.keys()})
+
+    # print(InputDict)
+    # print(Qdict)
 
     # Defining the display colors.
     red = (255, 0, 0)
