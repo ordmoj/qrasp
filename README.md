@@ -16,8 +16,10 @@ These scripts were developed and tested with the following hard- and software:
 - Software
   - Raspbian GNU/Linux 9 (stretch)
   - sense-hat 2.2.0
-  - [qiskit](https://qiskit.org/) 0.6.1 (seems to run fine on 0.7) 
+  - [qiskit](https://qiskit.org/) 0.6.1 (seems to run fine on 0.7)   
 **Note:** This software was developed on qiskit v0.6.1. The qiskit-returned results dictionary differs between v0.6 and v0.7. If you are running Qrasp on qiskit v0.7 or higher you must uncomment a line in *qc_sensehat_func.py* to override the v0.6 processing. See the comment in that file. 
+  - To run on IBM Q hardware you must first register with IBM Q Experience at: https://quantumexperience.ng.bluemix.net/.  
+  Use the Advanced tab of your account page to generate an API key and copy this key into the Qconfig_IBMQ_experience.py file.
 
 ### What you can do with this version...
 This version lets you run four different quantum scripts that demo superposition and entanglement with two and three qubits.
