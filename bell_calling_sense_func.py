@@ -6,7 +6,7 @@ from sense_hat import SenseHat
 hat = SenseHat()
 
 # Define the execute function that is called by the main controller.
-def execute():
+def execute(backend,back):
     from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
     from qiskit import execute
     import numpy as np
@@ -26,8 +26,10 @@ def execute():
     circuit.measure(qr[0], cr[0])
     circuit.measure(qr[1], cr[1])
     # Set the backend to execute on
-    from qiskit import Aer
-    backend = Aer.get_backend('qasm_simulator')
+    # from qiskit import Aer
+    # backend = Aer.get_backend('qasm_simulator')
+    # Display backend
+    # hat.show_message(backend.name())
     # Create a Quantum Program for execution of the circuit on the selected backend
     job = execute(circuit, backend, shots=sh)
     # Get the result of the execution
@@ -41,4 +43,4 @@ def execute():
     # Import the Raspberry PI SenseHat display function.
     from qc_sensehat_func import SenseDisplay
     # Display the quantum dictionary as a bar graph on the SenseHat 8x8 pixel display by calling the SenseDisplay function.
-    SenseDisplay(Qdictres,n)
+    SenseDisplay(Qdictres,n,back)
