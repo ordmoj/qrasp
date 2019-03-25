@@ -4,7 +4,6 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
 ![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
 
 ## Updates
-
 - March 2019 
    - V0.3 tested with qiskit-terra 0.7. The v0.6/v0.7 mismatch workarounds in qc_sensehat_func.py removed. 
    - V0.2 with updates to run Qrasp against actual IBM Q hardware.  
@@ -30,7 +29,11 @@ You use the joystick to select the script to run:
 - Down: Three qubit GHZ state (entanglement)
 - Right: Three qubit superposition
 - Left: Two qubit superposition
-- Push: Set the backend (AER 'qasm_simulator' or IBMQ 'ibmqx4' configurable in main_controller.py)
+- Push: Set the backend (AER 'qasm_simulator' or IBMQ 'ibmqx2' configurable in main_controller.py). 
+![aer_logo.jpg](aer_logo.jpg)
+Qrasp in Aer simulator mode.
+![ibmq_logo.jpg](ibmq_logo.jpg) 
+Qrasp in IBM Q hardware mode. Looks much better in real life... White-on-blue contrast doesn't work well with cameras.
 
 ### Planned for the future
 - Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
