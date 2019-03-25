@@ -3,6 +3,7 @@
 
 # Start by importing and simplifying required modules. 
 from sense_hat import SenseHat
+#from sense_emu import SenseHat
 hat = SenseHat()
 
 # Understand which direction is down, and rotate the SenseHat display accordingly.
@@ -33,24 +34,10 @@ def SenseDisplay(InputDict,Qbits,back):
     values = [0]*pow(2,Qbits)
     Qdict = dict(zip(lst,values))
     
-    # Uncomment the 'back' parameter line below if you are running qiskit v0.7 or higher.
-    # The local dictionary returned by Aer differs between v0.6 and v0.7+
-    # The 'else' process below is made for qiskit v0.6 on the Raspberry PI,
-    # with the 'if' process a workaround for v0.7 and IBM Q hardware (back = 'ibmq').
-    
-    # back = 'ibmq'
+    #back = 'aer' # <- Remove if connected to wifi. Temporary solution.
     
     # Update the dictionary with the actual dictionary values sent to the function.        
-    if back =='ibmq': 
-        k = len(InputDict)
-        print(k)
-        InputDictList=list(InputDict.keys())
-        InputDictVal=list(InputDict.values())
-        for i in range (0,k):
-            Qdict[bin(int(InputDictList[i],16))[2:].zfill(Qbits)]=InputDictVal[i]
-            # print(Qdict[bin(int(InputDictList[i],16))[2:].zfill(Qbits)])
-    else:
-        Qdict.update(InputDict)
+    Qdict.update(InputDict)
 
     # Scale by dividing by 1024 (shots) - For now assuming 1024, which is set by the sh parameter.
     # Qdict.update({m: (1/sh) * Qdict[m] for m in Qdict.keys()})
