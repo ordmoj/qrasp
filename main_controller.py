@@ -2,10 +2,12 @@
 
 # Start by importing and simplifying required modules. 
 from sense_hat import SenseHat
+#from sense_emu import SenseHat
 hat = SenseHat()
 import time
 
-from qiskit import IBMQ, Aer, execute
+from qiskit import IBMQ, execute
+from qiskit import BasicAer as Aer #<-Workaround
 import Qconfig_IBMQ_experience
 # from qiskit.tools.monitor import job_monitor
 
@@ -97,9 +99,10 @@ def set_backend(back):
     global backend
     if back == "ibmq":
         backend = IBMQ.get_backend('ibmqx4')
+        #backend = Aer.get_backend('qasm_simulator')  
     else:
         backend = Aer.get_backend('qasm_simulator')    
-    print(backend.name)
+    #print(backend.name)
     
 # Load the Qiskit function files. Showing messages when starting and when done.
 hat.show_message("Qiskit")
