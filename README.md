@@ -19,7 +19,7 @@ These scripts were developed and tested with the following hard- and software:
 - Software
   - Raspbian GNU/Linux 9 (stretch)
   - sense-hat 2.2.0
-  - [qiskit](https://qiskit.org/) v0.7  
+  - [qiskit](https://qiskit.org/) v0.8 / Qiskit Terra v0.71  
 
 ### What you can do with this version...
 This version lets you run four different quantum scripts that demo superposition and entanglement with two and three qubits.
