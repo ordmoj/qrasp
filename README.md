@@ -36,7 +36,10 @@ You use the joystick to select the script to run:
 - Down: Three qubit GHZ state (entanglement)
 - Right: Three qubit superposition
 - Left: Two qubit superposition
-- Push: Set the backend (AER 'qasm_simulator' or IBMQ 'ibmqx2' configurable in main_controller.py). 
+- Push: Set the backend:
+    - AER 'qasm_simulator'
+    - IBMQ 'ibmqx2'
+    - IBMQ 'ibmqx4'
 ![aer_logo.jpg](aer_logo.jpg)
 Qrasp in Aer simulator mode.
 ![ibmq_logo.jpg](ibmq_logo.jpg) 
