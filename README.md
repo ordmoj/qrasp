@@ -10,7 +10,7 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
             - qasm_simulator
             - ibmqx2
             - ibmqx4
-        - Added bar chart gradients for smoother data display. 
+        - Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 of the bar.
 - March 2019 
    - V0.3 tested with qiskit-terra 0.7. The v0.6/v0.7 mismatch workarounds in qc_sensehat_func.py removed. 
    - V0.2 with updates to run Qrasp against actual IBM Q hardware.  
@@ -47,7 +47,6 @@ Qrasp in IBM Q hardware mode. Looks much better in real life... White-on-blue co
 - Status and queue indicator for running against IBM Q hardware.
 - Auto selector for best IBM Q hardware.
 - Use built-in SenseHat emulator instead of hardware SenseHat.
-- Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 or the bar.
 - More...
 
 ## Contents
