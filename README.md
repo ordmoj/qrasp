@@ -4,6 +4,13 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
 ![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
 
 ## Updates
+- April 2019
+    - V0.4 Backends and display upgrades.
+        - Added more IBM Q backends. You can now push the joystick to cycle through:
+            - qasm_simulator
+            - ibmqx2
+            - ibmqx4
+        - Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 of the bar.
 - March 2019 
    - V0.3 tested with qiskit-terra 0.7. The v0.6/v0.7 mismatch workarounds in qc_sensehat_func.py removed. 
    - V0.2 with updates to run Qrasp against actual IBM Q hardware.  
@@ -29,7 +36,10 @@ You use the joystick to select the script to run:
 - Down: Three qubit GHZ state (entanglement)
 - Right: Three qubit superposition
 - Left: Two qubit superposition
-- Push: Set the backend (AER 'qasm_simulator' or IBMQ 'ibmqx2' configurable in main_controller.py). 
+- Push: Set the backend:
+    - AER 'qasm_simulator'
+    - IBMQ 'ibmqx2'
+    - IBMQ 'ibmqx4'
 ![aer_logo.jpg](aer_logo.jpg)
 Qrasp in Aer simulator mode.
 ![ibmq_logo.jpg](ibmq_logo.jpg) 
@@ -40,7 +50,6 @@ Qrasp in IBM Q hardware mode. Looks much better in real life... White-on-blue co
 - Status and queue indicator for running against IBM Q hardware.
 - Auto selector for best IBM Q hardware.
 - Use built-in SenseHat emulator instead of hardware SenseHat.
-- Color gradients between the red and blue LEDs to indicate results with finer granularity than 1/8 or the bar.
 - More...
 
 ## Contents
