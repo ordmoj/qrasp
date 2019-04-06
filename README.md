@@ -5,11 +5,12 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
 
 ## Updates
 - April 2019
-    - Added more IBM Q backends. You can now push the joystick to cycle through:
-        - qasm_simulator
-        - ibmqx2
-        - ibmqx4
-    - Added bar chart gradients for smoother data display. 
+    - V0.4 Backends and display upgrades.
+        - Added more IBM Q backends. You can now push the joystick to cycle through:
+            - qasm_simulator
+            - ibmqx2
+            - ibmqx4
+        - Added bar chart gradients for smoother data display. 
 - March 2019 
    - V0.3 tested with qiskit-terra 0.7. The v0.6/v0.7 mismatch workarounds in qc_sensehat_func.py removed. 
    - V0.2 with updates to run Qrasp against actual IBM Q hardware.  
