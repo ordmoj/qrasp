@@ -58,12 +58,23 @@ def SenseDisplay(InputDict,Qbits,back):
     for key in Qdict:
         y=7-int(key,2)
         for x in range (0,8):
-                if (x*128)-Qdict[key]<0:
+                val = ((x+1)*128)-Qdict[key]
+                if val<0:
                         #Set bar color.
-                        hat.set_pixel(x, y, red) 
+                        #hat.set_pixel(x, y, red)
+                        color=red
                 else:
+                    if val>0 and val<128:
+                        #Set bar color.
+                        fade = (255-(2*val),0,(2*val))
+                        #hat.set_pixel(x,y,fade)
+                        color=fade
+                    else:
                         #Set background color
-                        hat.set_pixel(x, y, blue) 
-       # print (Qdict[key])
-       # print (int(key,2))
+                        #hat.set_pixel(x, y, blue)
+                        color=blue
+                print (x, x*128, Qdict[key],y, color)
+                hat.set_pixel(x, y, color) 
+        #print (Qdict[key])
+        #print (int(key,2))
 
