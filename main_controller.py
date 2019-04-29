@@ -21,6 +21,7 @@ hat.low_light = True
 # Background icon
 X = [255, 0, 255]  # Magenta
 Y = [255,192,203] # Pink
+P = [255,255,0] #Yellow
 O = [0, 0, 0]  # Black
 B = [0,0,255] # Blue
 #B = [70,107,176] # IBM Blue
@@ -53,12 +54,36 @@ IBM_Q = [
 B, B, B, W, W, B, B, B,
 B, B, W, B, B, W, B, B,
 B, W, B, B, B, B, W, B,
-B, W, B, B, B, B, W, B,
-B, W, B, B, B, B, W, B,
-B, B, W, B, B, W, B, B,
-B, B, B, W, W, B, B, B,
-B, B, B, W, W, W, B, B
+P, P, P, B, B, B, W, B,
+B, W, P, B, B, B, W, B,
+P, P, P, B, B, W, B, B,
+P, B, B, W, W, B, B, B,
+P, P, P, W, W, W, B, B
 ]
+
+IBM_Q_4 = [
+B, B, B, W, W, B, B, B,
+B, B, W, B, B, W, B, B,
+B, W, B, B, B, B, W, B,
+P, W, P, B, B, B, W, B,
+P, W, P, B, B, B, W, B,
+P, P, P, B, B, W, B, B,
+B, B, P, W, W, B, B, B,
+B, B, P, W, W, W, B, B
+]
+
+IBM_Q_B = [
+B, B, B, W, W, B, B, B,
+B, B, W, B, B, W, B, B,
+B, W, B, B, B, B, W, B,
+B, W, B, B, B, B, W, B,
+B, W, B, B, B, B, W, B,
+B, P, W, B, B, W, B, B,
+P, P, P, W, W, B, B, B,
+B, P, B, W, W, W, B, B
+]
+
+
 
 
 IBM_AER = [
@@ -96,12 +121,19 @@ set_display()
 
 # Function to set the backend
 def set_backend(back):
+    from qiskit.providers.ibmq import least_busy
     global backend
     if back == "ibmq":
-        backend = IBMQ.get_backend('ibmqx4')
+        backend = IBMQ.get_backend('ibmqx2')
         #backend = Aer.get_backend('qasm_simulator')  
     else:
-        backend = Aer.get_backend('qasm_simulator')    
+        if back == "ibmq2":
+           backend = IBMQ.get_backend('ibmqx4')
+        else:
+            if back == "ibmq_best":
+               backend = least_busy(IBMQ.backends(filters=lambda x: not x.configuration().simulator))
+            else:
+                backend = Aer.get_backend('qasm_simulator')    
     #print(backend.name)
     
 # Load the Qiskit function files. Showing messages when starting and when done.
@@ -129,7 +161,7 @@ while True:
         if joy_event[0][1]=="up":
             hat.show_message("Bell")
             #hat.show_message(backend.name())
-            if back == "ibmq":
+            if back != "aer":
                 hat.set_pixels(IBMQ_super_position)
             else:
                 hat.set_pixels(super_position)
@@ -138,7 +170,7 @@ while True:
             if joy_event[0][1]=="down":
                 hat.show_message("GHZ")
                 #hat.show_message(backend.name())
-                if back == "ibmq":
+                if back != "aer":
                     hat.set_pixels(IBMQ_super_position)
                 else:
                     hat.set_pixels(super_position)
@@ -147,7 +179,7 @@ while True:
                 if joy_event[0][1]=="left":
                     hat.show_message("2Q")
                     #hat.show_message(backend.name())
-                    if back == "ibmq":
+                    if back != "aer":
                         hat.set_pixels(IBMQ_super_position)
                     else:
                         hat.set_pixels(super_position)
@@ -156,7 +188,7 @@ while True:
                     if joy_event[0][1]=="right":
                         hat.show_message("3Q")
                         #hat.show_message(backend.name())
-                        if back == "ibmq":
+                        if back != "aer":
                             hat.set_pixels(IBMQ_super_position)
                         else:
                             hat.set_pixels(super_position)
@@ -170,10 +202,23 @@ while True:
                                 hat.show_message(backend.name())
                                 hat.set_pixels(IBM_Q)
                             else:
-                                back = "aer"
-                                #hat.show_message("AER")
-                                set_backend(back)
-                                hat.show_message(backend.name())
-                                hat.set_pixels(IBM_AER)
+                                if back == "ibmq":
+                                    back = "ibmq2"
+                                    set_backend(back)
+                                    hat.show_message(backend.name())
+                                    hat.set_pixels(IBM_Q_4)
+                                else:
+                                    if back == "ibmq2":
+                                       hat.show_message("Best")
+                                       back = "ibmq_best"
+                                       set_backend(back)
+                                       hat.show_message(backend.name())
+                                       hat.set_pixels(IBM_Q_B)
+                                    else:
+                                        back = "aer"
+                                        #hat.show_message("AER")
+                                        set_backend(back)
+                                        hat.show_message(backend.name())
+                                        hat.set_pixels(IBM_AER)
                                     
 
