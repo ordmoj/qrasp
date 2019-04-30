@@ -210,6 +210,7 @@ while True:
                                 else:
                                     if back == "ibmq2":
                                        hat.show_message("Best")
+                                       hat.set_pixels(IBMQ_super_position)
                                        back = "ibmq_best"
                                        set_backend(back)
                                        hat.show_message(backend.name())
