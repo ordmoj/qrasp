@@ -4,6 +4,8 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
 ![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
 
 ## Updates
+- May 2019
+    - V0.5 Best backends, and display ibmqx version in selector.
 - April 2019
     - V0.4 Backends and display upgrades.
         - Added more IBM Q backends. You can now push the joystick to cycle through:
@@ -40,6 +42,7 @@ You use the joystick to select the script to run:
     - AER 'qasm_simulator'
     - IBMQ 'ibmqx2'
     - IBMQ 'ibmqx4'
+    - Least busy IBM Q backend.
 ![aer_logo.jpg](aer_logo.jpg)
 Qrasp in Aer simulator mode.
 ![ibmq_logo.jpg](ibmq_logo.jpg) 
@@ -48,7 +51,6 @@ Qrasp in IBM Q hardware mode. Looks much better in real life... White-on-blue co
 ### Planned for the future
 - Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
 - Status and queue indicator for running against IBM Q hardware.
-- Auto selector for best IBM Q hardware.
 - Use built-in SenseHat emulator instead of hardware SenseHat.
 - More...
 
