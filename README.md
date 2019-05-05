@@ -45,8 +45,8 @@ You use the joystick to select the script to run:
     - Least busy IBM Q backend.
 ![aer_logo.jpg](aer_logo.jpg)
 Qrasp in Aer simulator mode.
-![ibmq_logo.jpg](ibmq_logo.jpg) 
-Qrasp in IBM Q hardware mode. Looks much better in real life... White-on-blue contrast doesn't work well with cameras.
+![ibmq_logo.jpg](ibmqx4_selected.jpg) 
+Qrasp in IBM Q hardware mode, with IBM Qx 4 selected. Looks much better in real life... White-and-yellow-on-blue contrast doesn't work well with cameras.
 
 ### Planned for the future
 - Snazzy 'quantum calculations running' animation on the 8x8 LED display while the simulation is running or while waiting for the hardware backend to return results.
