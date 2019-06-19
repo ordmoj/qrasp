@@ -33,9 +33,7 @@ def SenseDisplay(InputDict,Qbits,back):
     lst = [bin(x)[2:].rjust(Qbits, '0') for x in range(2**Qbits)]
     values = [0]*pow(2,Qbits)
     Qdict = dict(zip(lst,values))
-    
-    #back = 'aer' # <- Remove if connected to wifi. Temporary solution.
-    
+        
     # Update the dictionary with the actual dictionary values sent to the function.        
     Qdict.update(InputDict)
 
@@ -56,25 +54,21 @@ def SenseDisplay(InputDict,Qbits,back):
     
     # Writing to the SenseHat display pixels.
     for key in Qdict:
-        y=7-int(key,2)
-        for x in range (0,8):
-                val = ((x+1)*128)-Qdict[key]
+        y=7-int(key,2) # Cycle through the states 
+        for x in range (0,8): # Cycle through the pixels
+                val = ((x+1)*128)-Qdict[key] # The difference between the state result and the pixel x position
                 if val<0:
-                        #Set bar color.
-                        #hat.set_pixel(x, y, red)
+                        #If the state result is greater than the pixel, set pixel color red.
                         color=red
                 else:
                     if val>0 and val<128:
-                        #Set bar color.
+                        #If the state result is within the pixel, set pixel color gradient.
                         fade = (255-(2*val),0,(2*val))
-                        #hat.set_pixel(x,y,fade)
                         color=fade
                     else:
-                        #Set background color
-                        #hat.set_pixel(x, y, blue)
+                        #If the state result is less than the pixel, set pixel color blue.
                         color=blue
-                print (x, x*128, Qdict[key],y, color)
+                #Set pixel color.
                 hat.set_pixel(x, y, color) 
-        #print (Qdict[key])
-        #print (int(key,2))
+
 

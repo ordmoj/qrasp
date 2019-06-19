@@ -4,6 +4,8 @@ A set of Python scripts that uses [Qiskit](https://qiskit.org) to run two or thr
 ![qrasp_3qubit_GHZ.jpg](qrasp_3qubit_GHZ.jpg)
 
 ## Updates
+- June 2019
+    - V0.6 Offline mode. Qrasp checks for internet connection and defaults to Aer simulator if none is found.
 - May 2019
     - V0.5 Best backends, and display ibmqx version in selector.
 - April 2019

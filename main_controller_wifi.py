@@ -6,51 +6,14 @@ from sense_hat import SenseHat
 hat = SenseHat()
 import time
 
+from qiskit import IBMQ, Aer, execute
 
-# Understand which direction is down, and rotate the SenseHat display accordingly.
-def set_display():
-        acceleration = hat.get_accelerometer_raw()
-        x = acceleration['x']
-        y = acceleration['y']
-        z = acceleration['z']
-        x=round(x,0)
-        y=round(y,0)
-        z=round(z,0)
-        if x == 1:
-            hat.set_rotation(270)
-        else:
-            if x == -1:
-                hat.set_rotation(90)
-            else:
-                if y == 1:
-                    hat.set_rotation(0)
-                else:
-                    hat.set_rotation(180)
 
-set_display()       
-
-#Check if online
-from urllib.request import urlopen
-
-def internet_on():
-    try:
-        response = urlopen('https://www.google.com', timeout=10)
-        return True
-    except:
-        return False
-
-#Import Qiskit classes
-from qiskit import IBMQ, execute
-from qiskit import BasicAer as Aer #<-Workaround
 import Qconfig_IBMQ_experience
 # from qiskit.tools.monitor import job_monitor
 
-# If online, enable the account based on the stored API key
-if internet_on():
-    IBMQ.enable_account(Qconfig_IBMQ_experience.APItoken)
-else:
-    hat.show_message("Offline mode")
-
+# Enable the account based on the stored API key
+IBMQ.enable_account(Qconfig_IBMQ_experience.APItoken)
 
 # Set default SenseHat configuration.
 hat.clear()
@@ -59,7 +22,6 @@ hat.low_light = True
 # Background icon
 X = [255, 0, 255]  # Magenta
 Y = [255,192,203] # Pink
-P = [255,255,0] #Yellow
 O = [0, 0, 0]  # Black
 B = [0,0,255] # Blue
 #B = [70,107,176] # IBM Blue
@@ -92,36 +54,12 @@ IBM_Q = [
 B, B, B, W, W, B, B, B,
 B, B, W, B, B, W, B, B,
 B, W, B, B, B, B, W, B,
-P, P, P, B, B, B, W, B,
-B, W, P, B, B, B, W, B,
-P, P, P, B, B, W, B, B,
-P, B, B, W, W, B, B, B,
-P, P, P, W, W, W, B, B
-]
-
-IBM_Q_4 = [
-B, B, B, W, W, B, B, B,
+B, W, B, B, B, B, W, B,
+B, W, B, B, B, B, W, B,
 B, B, W, B, B, W, B, B,
-B, W, B, B, B, B, W, B,
-P, W, P, B, B, B, W, B,
-P, W, P, B, B, B, W, B,
-P, P, P, B, B, W, B, B,
-B, B, P, W, W, B, B, B,
-B, B, P, W, W, W, B, B
-]
-
-IBM_Q_B = [
 B, B, B, W, W, B, B, B,
-B, B, W, B, B, W, B, B,
-B, W, B, B, B, B, W, B,
-B, W, B, B, B, B, W, B,
-B, W, B, B, B, B, W, B,
-B, P, W, B, B, W, B, B,
-P, P, P, W, W, B, B, B,
-B, P, B, W, W, W, B, B
+B, B, B, W, W, W, B, B
 ]
-
-
 
 
 IBM_AER = [
@@ -134,31 +72,37 @@ W, O, W, W, W, W, O, W,
 O, W, O, O, O, O, W, O,
 O, O, W, W, W, W, O, O
 ]
-         
+
+# Understand which direction is down, and rotate the SenseHat display accordingly.
+def set_display():
+        acceleration = hat.get_accelerometer_raw()
+        x = acceleration['x']
+        y = acceleration['y']
+        z = acceleration['z']
+        x=round(x,0)
+        y=round(y,0)
+        z=round(z,0)
+        if x == 1:
+            hat.set_rotation(270)
+        else:
+            if x == -1:
+                hat.set_rotation(90)
+            else:
+                if y == 1:
+                    hat.set_rotation(0)
+                else:
+                    hat.set_rotation(180)
+
+set_display()                
 
 # Function to set the backend
 def set_backend(back):
-    from qiskit.providers.ibmq import least_busy
     global backend
-    if back == "ibmq" and internet_on():
-        backend = IBMQ.get_backend('ibmqx2')
-        hat.show_message(backend.name())
-        hat.set_pixels(IBM_Q)
+    if back == "ibmq":
+        backend = IBMQ.get_backend('ibmqx4')
     else:
-        if back == "ibmq2" and internet_on():
-           backend = IBMQ.get_backend('ibmqx4')
-           hat.show_message(backend.name())
-           hat.set_pixels(IBM_Q_4)
-        else:
-            if back == "ibmq_best" and internet_on():
-               backend = least_busy(IBMQ.backends(filters=lambda x: not x.configuration().simulator))
-               hat.show_message(backend.name())
-               hat.set_pixels(IBM_Q_B)
-            else:
-                backend = Aer.get_backend('qasm_simulator')
-                hat.show_message(backend.name())
-                hat.set_pixels(IBM_AER)
-                
+        backend = Aer.get_backend('qasm_simulator')    
+    print(backend.name)
     
 # Load the Qiskit function files. Showing messages when starting and when done.
 hat.show_message("Qiskit")
@@ -172,7 +116,8 @@ import GHZ_calling_sense_func
 # Initialize the backend to AER
 back = "aer" 
 set_backend(back)
-
+hat.show_message(backend.name())
+hat.set_pixels(IBM_AER)
 
 # The main loop.
 # Use the joystick to select and execute one of the Qiskit function files.
@@ -183,7 +128,8 @@ while True:
         set_display()
         if joy_event[0][1]=="up":
             hat.show_message("Bell")
-            if back != "aer"and internet_on():
+            #hat.show_message(backend.name())
+            if back == "ibmq":
                 hat.set_pixels(IBMQ_super_position)
             else:
                 hat.set_pixels(super_position)
@@ -191,7 +137,8 @@ while True:
         else:
             if joy_event[0][1]=="down":
                 hat.show_message("GHZ")
-                if back != "aer" and internet_on():
+                #hat.show_message(backend.name())
+                if back == "ibmq":
                     hat.set_pixels(IBMQ_super_position)
                 else:
                     hat.set_pixels(super_position)
@@ -199,7 +146,8 @@ while True:
             else:
                 if joy_event[0][1]=="left":
                     hat.show_message("2Q")
-                    if back != "aer" and internet_on():
+                    #hat.show_message(backend.name())
+                    if back == "ibmq":
                         hat.set_pixels(IBMQ_super_position)
                     else:
                         hat.set_pixels(super_position)
@@ -207,7 +155,8 @@ while True:
                 else:
                     if joy_event[0][1]=="right":
                         hat.show_message("3Q")
-                        if back != "aer" and internet_on():
+                        #hat.show_message(backend.name())
+                        if back == "ibmq":
                             hat.set_pixels(IBMQ_super_position)
                         else:
                             hat.set_pixels(super_position)
@@ -216,19 +165,15 @@ while True:
                         if joy_event[0][1]=="middle":
                             if back == "aer":
                                 back = "ibmq"
+                                #hat.show_message("IBMQ")
                                 set_backend(back)
+                                hat.show_message(backend.name())
+                                hat.set_pixels(IBM_Q)
                             else:
-                                if back == "ibmq":
-                                    back = "ibmq2"
-                                    set_backend(back)
-                                else:
-                                    if back == "ibmq2":
-                                       hat.show_message("Best")
-                                       hat.set_pixels(IBMQ_super_position)
-                                       back = "ibmq_best"
-                                       set_backend(back)
-                                    else:
-                                        back = "aer"
-                                        set_backend(back)
+                                back = "aer"
+                                #hat.show_message("AER")
+                                set_backend(back)
+                                hat.show_message(backend.name())
+                                hat.set_pixels(IBM_AER)
                                     
 
