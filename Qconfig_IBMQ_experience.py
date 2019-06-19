@@ -1,1 +1,1 @@
-APItoken ='Your API token'
+APItoken ='Your_API_Key'
