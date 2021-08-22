@@ -46,7 +46,8 @@ import Qconfig_IBMQ_experience
 print("Getting provider...")
 if not IBMQ.active_account():
     if internet_on():
-        IBMQ.enable_account(Qconfig_IBMQ_experience.APItoken)
+        #IBMQ.enable_account(Qconfig_IBMQ_experience.APItoken)
+        IBMQ.load_account()
         provider = IBMQ.get_provider()
     else:
         hat.show_message("Offline mode")
